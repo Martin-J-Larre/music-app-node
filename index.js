@@ -9,6 +9,7 @@ const songRoutes = require("./routes/song");
 const userRoutes = require("./routes/user");
 
 const app = express();
+const PORT = process.env.PORT || 5001;
 connection();
 
 app.use(cors());
@@ -24,6 +25,6 @@ app.use("/api/artist", artistRoutes);
 app.use("/api/song", songRoutes);
 app.use("/api/user", userRoutes);
 
-app.listen(process.env.PORT, () => {
-  console.log(`Server running on http://localhost:${process.env.PORT}`);
+app.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
 });
