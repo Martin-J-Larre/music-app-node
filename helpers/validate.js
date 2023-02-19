@@ -4,11 +4,11 @@ const validate = (data) => {
   const name =
     !validator.isEmpty(data.name) &&
     validator.isLength(data.name, { min: 3, max: undefined }) &&
-    validator.isAlpha(data.name);
+    validator.isAlpha(data.surname, "en-US", { ignore: " " });
   const surname =
     !validator.isEmpty(data.surname) &&
     validator.isLength(data.surname, { min: 3, max: undefined }) &&
-    validator.isAlpha(data.surname);
+    validator.isAlpha(data.surname, "en-US", { ignore: " " });
   const nickname =
     !validator.isEmpty(data.nickname) &&
     validator.isLength(data.nickname, { min: 2, max: 60 });
