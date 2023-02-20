@@ -2,6 +2,7 @@ const bcrypt = require("bcrypt");
 
 const validate = require("../helpers/validate");
 const UserModel = require("../models/User");
+const jwt = require("../helpers/jwt");
 
 exports.register = (req, res) => {
   const data = req.body;
@@ -84,7 +85,7 @@ exports.login = (req, res) => {
   }
 
   UserModel.findOne({ email: data.email })
-    .select("+password")
+    .select("+password +role")
     .exec((error, user) => {
       if (error || !user) {
         return res.status(404).json({
@@ -105,10 +106,32 @@ exports.login = (req, res) => {
       const dataUser = user.toObject();
       delete dataUser.password;
 
+      const token = jwt.createToken(user);
+
       return res.status(200).json({
         status: "success",
         message: "It is all OK Login",
         user: dataUser,
+        token,
       });
     });
+};
+
+exports.getUserProfile = (req, res) => {
+  const userId = req.params.id;
+
+  UserModel.findById(userId, (error, userProfile) => {
+    if (error || !userProfile) {
+      return res.status(400).json({
+        status: "error",
+        message: "Error user profile could not be found",
+      });
+    }
+
+    return res.status(200).json({
+      status: "success",
+      message: "All ok method get user profile",
+      userProfile,
+    });
+  });
 };
