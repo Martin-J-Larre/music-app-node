@@ -20,6 +20,7 @@ const UserSchema = mongoose.Schema({
   password: {
     type: String,
     require: true,
+    select: false,
   },
   image: {
     type: String,
@@ -28,6 +29,7 @@ const UserSchema = mongoose.Schema({
   role: {
     type: String,
     default: "user",
+    select: false,
   },
   create_at: {
     type: Date,
