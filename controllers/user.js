@@ -127,11 +127,34 @@ exports.getUserProfile = (req, res) => {
         message: "Error user profile could not be found",
       });
     }
-
     return res.status(200).json({
       status: "success",
-      message: "All ok method get user profile",
+      message: "User found successfully",
       userProfile,
     });
+  });
+};
+
+exports.updateUser = (req, res) => {
+  // const userAuthData = req.user;
+  // const dataToUpdate = req.body;
+
+  // UserModel.find({
+  //   $0r: [
+  //     { email: dataToUpdate.email.toLowerCase() },
+  //     { nickname: dataToUpdate.nickname.toLowerCase() },
+  //   ],
+  // }).exec((error, users) => {
+  //   if (error) {
+  //     return res.status(500).json({
+  //       status: "error",
+  //       message: "Error user could not be found",
+  //     });
+  //   }
+  // });
+
+  return res.status(200).json({
+    status: "success",
+    message: "User updated successfully",
   });
 };
