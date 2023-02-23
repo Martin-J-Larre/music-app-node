@@ -1,9 +1,11 @@
 const bcrypt = require("bcrypt");
 const fs = require("fs");
+const path = require("path");
 
 const validate = require("../helpers/validate");
 const UserModel = require("../models/User");
 const jwt = require("../helpers/jwt");
+const { exists } = require("../models/User");
 
 exports.register = (req, res) => {
   const data = req.body;
@@ -233,4 +235,23 @@ exports.uploadAvatar = (req, res) => {
       });
     }
   );
+};
+
+exports.getAvatar = (req, res) => {
+  const file = req.params.file;
+
+  const filePath = "./uploads/avatars/" + file;
+
+  console.log(filePath);
+
+  fs.stat(filePath, (error, exists) => {
+    if (error || !exists) {
+      return res.status(404).json({
+        status: "error",
+        message: "File does not exist",
+      });
+    }
+
+    return res.sendFile(path.resolve(filePath));
+  });
 };

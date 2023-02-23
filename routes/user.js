@@ -24,6 +24,7 @@ router.post(
   userController.uploadAvatar
 );
 router.get("/profile/:id", isAuth, userController.getUserProfile);
+router.get("/avatar/:file", userController.getAvatar);
 router.put("/update", isAuth, userController.updateUser);
 
 module.exports = router;
