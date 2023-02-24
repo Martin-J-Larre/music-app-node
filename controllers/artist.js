@@ -1,4 +1,6 @@
 const mongoosePagination = require("mongoose-pagination");
+const fs = require("fs");
+const path = require("path");
 
 const ArtistModel = require("../models/Artist");
 
@@ -73,4 +75,115 @@ exports.getAllArtists = (req, res) => {
         artists,
       });
     });
+};
+
+exports.updateArtist = (req, res) => {
+  const artistId = req.params.id;
+  const dataToUpdate = req.body;
+
+  // TODO: Add a validator
+  ArtistModel.findByIdAndUpdate(
+    artistId,
+    dataToUpdate,
+    { new: true },
+    (error, artistUpdated) => {
+      if (error || !artistUpdated) {
+        return res.status(400).json({
+          status: "error",
+          message: "Error artist could not be updated",
+        });
+      }
+
+      return res.status(200).json({
+        status: "success",
+        message: "Artist updated successfully",
+        artistUpdated,
+      });
+    }
+  );
+};
+
+exports.deleteArtist = async (req, res) => {
+  const artistId = req.params.id;
+  try {
+    const artistDeleted = await ArtistModel.findByIdAndDelete(artistId);
+
+    return res.status(200).json({
+      status: "success",
+      message: "Artist deleted successfully",
+      artistDeleted,
+    });
+  } catch (error) {
+    return res.status(200).json({
+      status: "Error",
+      message: "Error artist could not be deleted",
+      error,
+    });
+  }
+};
+
+exports.uploadImage = (req, res) => {
+  if (!req.file) {
+    return res.status(404).json({
+      status: "error",
+      message: "Error file do not exist",
+      file: req.file,
+    });
+  }
+
+  const nameFile = req.file.originalname;
+  const nameFileSplit = nameFile.split(".");
+  const extension = nameFileSplit[1];
+
+  if (
+    extension != "png" &&
+    extension != "jpg" &&
+    extension != "jpeg" &&
+    extension != "gif"
+  ) {
+    const filePath = req.file.path;
+    const deleteFile = fs.unlinkSync(filePath);
+
+    return res.status(404).json({
+      status: "error",
+      message: "Error format file is not valid",
+    });
+  }
+
+  ArtistModel.findOneAndUpdate(
+    { _id: req.params.id },
+    { image: req.file.filename },
+    { new: true },
+    (error, artistUpdated) => {
+      if (error || !artistUpdated) {
+        return res.status(404).json({
+          status: "error",
+          message: "Error file could not be updated",
+        });
+      }
+      return res.status(200).json({
+        status: "success",
+        message: "File updated successfully",
+        file: req.file,
+        artistUpdated,
+      });
+    }
+  );
+};
+
+exports.getImage = (req, res) => {
+  const file = req.params.file;
+
+  const filePath = "./uploads/artists/" + file;
+
+  fs.stat(filePath, (error, exists) => {
+    if (error || !exists) {
+      return res.status(404).json({
+        status: "error",
+        message: "File does not exist",
+      });
+    }
+
+    return res.sendFile(path.resolve(filePath));
+  });
 };
