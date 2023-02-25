@@ -3,8 +3,10 @@ const fs = require("fs");
 const path = require("path");
 
 const ArtistModel = require("../models/Artist");
+const AlbumModel = require("../models/Album");
+const SongModel = require("../models/Song");
 
-exports.saveArtist = (req, res) => {
+exports.createArtist = (req, res) => {
   const data = req.body;
 
   if (!data.name) {
@@ -107,11 +109,19 @@ exports.deleteArtist = async (req, res) => {
   const artistId = req.params.id;
   try {
     const artistDeleted = await ArtistModel.findByIdAndDelete(artistId);
+    const albumDeleted = await AlbumModel.find({
+      artist: artistDeleted._id,
+    }).remove();
+    const SongDeleted = await SongModel.find({
+      album: albumDeleted._id,
+    }).remove();
 
     return res.status(200).json({
       status: "success",
       message: "Artist deleted successfully",
       artistDeleted,
+      albumDeleted,
+      SongDeleted,
     });
   } catch (error) {
     return res.status(200).json({

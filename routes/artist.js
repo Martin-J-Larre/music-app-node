@@ -16,7 +16,7 @@ const storage = multer.diskStorage({
 
 const uploads = multer({ storage });
 
-router.post("/save", isAuth, artistController.saveArtist);
+router.post("/save", isAuth, artistController.createArtist);
 router.get("/profile/:id", isAuth, artistController.getOneArtist);
 router.get("/profiles/:page?", isAuth, artistController.getAllArtists);
 router.put("/update/:id", isAuth, artistController.updateArtist);
