@@ -1,3 +1,6 @@
+const fs = require("fs");
+const path = require("path");
+
 const AlbumModel = require("../models/Album");
 
 exports.createAlbum = (req, res) => {
@@ -92,4 +95,70 @@ exports.updateAlbum = (req, res) => {
       });
     }
   );
+};
+
+exports.uploadImage = (req, res) => {
+  if (!req.file) {
+    return res.status(404).json({
+      status: "error",
+      message: "Error file do not exist",
+      file: req.file,
+    });
+  }
+
+  const nameFile = req.file.originalname;
+  const nameFileSplit = nameFile.split(".");
+  const extension = nameFileSplit[1];
+
+  if (
+    extension != "png" &&
+    extension != "jpg" &&
+    extension != "jpeg" &&
+    extension != "gif"
+  ) {
+    const filePath = req.file.path;
+    const deleteFile = fs.unlinkSync(filePath);
+
+    return res.status(404).json({
+      status: "error",
+      message: "Error format file is not valid",
+    });
+  }
+
+  AlbumModel.findOneAndUpdate(
+    { _id: req.params.id },
+    { image: req.file.filename },
+    { new: true },
+    (error, albumUpdated) => {
+      if (error || !albumUpdated) {
+        return res.status(404).json({
+          status: "error",
+          message: "Error file could not be updated",
+        });
+      }
+      return res.status(200).json({
+        status: "success",
+        message: "File updated successfully",
+        file: req.file,
+        albumUpdated,
+      });
+    }
+  );
+};
+
+exports.getImage = (req, res) => {
+  const file = req.params.file;
+
+  const filePath = "./uploads/albums/" + file;
+
+  fs.stat(filePath, (error, exists) => {
+    if (error || !exists) {
+      return res.status(404).json({
+        status: "error",
+        message: "File does not exist",
+      });
+    }
+
+    return res.sendFile(path.resolve(filePath));
+  });
 };
