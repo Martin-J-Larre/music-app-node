@@ -134,7 +134,7 @@ exports.uploadFile = (req, res) => {
     });
   }
 
-  AlbumModel.findOneAndUpdate(
+  SongModel.findOneAndUpdate(
     { _id: req.params.id },
     { file: req.file.filename },
     { new: true },

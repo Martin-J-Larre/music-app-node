@@ -22,7 +22,7 @@ router.get("/names/:albumId", isAuth, songController.getAllSongs);
 router.put("/update/:id", isAuth, songController.updateSong);
 router.delete("/delete/:id", isAuth, songController.deleteSong);
 router.post(
-  "upload/:id",
+  "/upload/:id",
   [isAuth, uploads.single("file")],
   songController.uploadFile
 );

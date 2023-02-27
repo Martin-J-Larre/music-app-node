@@ -2,6 +2,7 @@ const fs = require("fs");
 const path = require("path");
 
 const AlbumModel = require("../models/Album");
+const SongModel = require("../models/Song");
 
 exports.createAlbum = (req, res) => {
   const dataAlbum = req.body;
@@ -161,4 +162,25 @@ exports.getImage = (req, res) => {
 
     return res.sendFile(path.resolve(filePath));
   });
+};
+
+exports.deleteAlbum = async (req, res) => {
+  const albumId = req.params.id;
+  try {
+    const albumDeleted = await AlbumModel.findById(albumId).remove();
+    const songDeleted = await SongModel.find({ album: albumId }).remove();
+
+    return res.status(200).json({
+      status: "success",
+      message: "Album deleted successfully",
+      albumDeleted,
+      songDeleted,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      status: "Error",
+      message: "Error album could not be deleted",
+      error,
+    });
+  }
 };

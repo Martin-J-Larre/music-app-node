@@ -109,22 +109,23 @@ exports.deleteArtist = async (req, res) => {
   const artistId = req.params.id;
   try {
     const artistDeleted = await ArtistModel.findByIdAndDelete(artistId);
-    const albumDeleted = await AlbumModel.find({
-      artist: artistDeleted._id,
-    }).remove();
-    const SongDeleted = await SongModel.find({
-      album: albumDeleted._id,
-    }).remove();
+    const albumDeleted = await AlbumModel.find({ artist: artistId });
+
+    albumDeleted.forEach(async (album) => {
+      const songDeleted = await SongModel.find({
+        album: album._id,
+      }).remove();
+
+      album.remove();
+    });
 
     return res.status(200).json({
       status: "success",
       message: "Artist deleted successfully",
       artistDeleted,
-      albumDeleted,
-      SongDeleted,
     });
   } catch (error) {
-    return res.status(200).json({
+    return res.status(500).json({
       status: "Error",
       message: "Error artist could not be deleted",
       error,

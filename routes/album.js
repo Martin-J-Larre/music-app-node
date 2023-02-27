@@ -26,5 +26,6 @@ router.post(
   albumController.uploadImage
 );
 router.get("/image/:file", isAuth, albumController.getImage);
+router.delete("/delete/:id", isAuth, albumController.deleteAlbum);
 
 module.exports = router;
