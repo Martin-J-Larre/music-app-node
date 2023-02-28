@@ -108,10 +108,83 @@
         }</span
       >
 
-      <!-- update Album -->
+      <h3>Update Album</h3>
+      <h5>Method: PUT (add token in headers Authorization)</h5>
+      <span
+        >https://music-app-node.onrender.com/api/album/update/${ album id
+        }</span
+      >
+      <img src="img/update-album.png" />
+
+      <h3>Delete Album (delete album's song too)</h3>
+      <h5>Method: DELETE (add token in headers Authorization)</h5>
+      <span
+        >https://music-app-node.onrender.com/api/album/delete/${ album id
+        }</span
+      >
+
+      <h3>Upload Image Album</h3>
+      <h5>Method: POST (add token in headers Authorization)</h5>
+      <span
+        >https://music-app-node.onrender.com/api/album/upload/${ album id
+        }</span
+      >
+      <img src="img/avatar.png" />
+
+      <h3>Get Image Album</h3>
+      <h5>Method: GET (add token in headers Authorization)</h5>
+      <span
+        >https://music-app-node.onrender.com/api/album/image/${ filename }</span
+      >
     </div>
+
     <div class="song-container container">
       <h2>Song CRUD</h2>
+      <h3>Create Song</h3>
+      <h5>Method: POST (add token in headers Authorization)</h5>
+      <h5>Add album id in album key</h5>
+      <span>https://music-app-node.onrender.com/api/song/create</span>
+      <img src="img/create-song.png" />
+
+      <h3>Get One Song</h3>
+      <h5>Method: GET (add token in headers Authorization)</h5>
+      <span
+        >https://music-app-node.onrender.com/api/song/name/${ song id }</span
+      >
+
+      <h3>Get All Songs</h3>
+      <h5>Method: GET (add token in headers Authorization)</h5>
+      <span
+        >https://music-app-node.onrender.com/api/song/names/${ album id }</span
+      >
+
+      <h3>Update Song</h3>
+      <h5>Method: PUT (add token in headers Authorization)</h5>
+      <h5>Add album id in album key if update that field</h5>
+      <span
+        >https://music-app-node.onrender.com/api/song/update/${ song id}</span
+      >
+      <img src="img/create-song.png" />
+
+      <h3>Delete Song</h3>
+      <h5>Method: DELETE (add token in headers Authorization)</h5>
+      <span
+        >https://music-app-node.onrender.com/api/song/delete/${ song id }</span
+      >
+
+      <h3>Upload audio file</h3>
+      <h5>Method: POST (add token in headers Authorization)</h5>
+      <h5>Add file mp3 or ogg</h5>
+      <span
+        >https://music-app-node.onrender.com/api/song/upload/${ song id }</span
+      >
+      <img src="img/upload-song.png" />
+
+      <h3>Get audio file</h3>
+      <h5>Method: GET (add token in headers Authorization)</h5>
+      <span
+        >https://music-app-node.onrender.com/api/song/audio/${ filename }</span
+      >
     </div>
   </body>
 </html>
