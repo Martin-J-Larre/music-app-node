@@ -1,0 +1,56 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.body-wrapper {
+  background-color: #1c1c1c;
+  color: whitesmoke;
+  display: grid;
+  grid-gap: 10px;
+  grid-template-areas:
+    "title title"
+    "user artist"
+    "album song";
+}
+
+.body-wrapper > * {
+  border: 1px solid rgba(245, 245, 245, 0.042);
+  padding: 10px;
+}
+span {
+  color: #ca6212;
+}
+img {
+  width: 50%;
+}
+.title {
+  grid-area: title;
+  text-align: center;
+  font-size: 25px;
+  border: none;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.container > * {
+  padding-top: 10px;
+}
+
+.user-container {
+  grid-area: user;
+}
+
+.artist-container {
+  grid-area: artist;
+}
+
+.album-container {
+  grid-area: album;
+}
+
+.song-container {
+  grid-area: song;
+}

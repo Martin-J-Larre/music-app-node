@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Api scocial media nodeJS</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body class="body-wrapper">
+    <div class="title">
+      <h1>Api Music App Node</h1>
+    </div>
+
+    <div class="user-container container">
+      <h2>User CRUD</h2>
+      <h3>Register</h3>
+      <h5>Request Method: POST</h5>
+      <span>https://music-app-node.onrender.com/api/user/register</span>
+      <img src="img/register.png" />
+      <h3>Login</h3>
+      <h5>Request Method: POST</h5>
+      <span>https://music-app-node.onrender.com/api/user/login</span>
+      <img src="img/login.png" />
+      <h3>Get user profile</h3>
+      <h5>Request Method: GET (add token in headers Authorization)</h5>
+      <span
+        >https://music-app-node.onrender.com/api/user/profile/${user id}</span
+      >
+      <h3>Update user Auth</h3>
+      <h5>Request Method: PUT (add token in headers Authorization)</h5>
+      <span>https://music-app-node.onrender.com/api/user/update</span>
+      <h3>Upload user avatar</h3>
+      <h5>Request Method: POST (add token in headers Authorization)</h5>
+      <span>https://music-app-node.onrender.com/api/user/upload</span>
+      <img src="img/avatar.png" />
+      <h3>Get user avatar</h3>
+      <h5>Request Method: GET</h5>
+      <span
+        >https://music-app-node.onrender.com/api/user/avatar/${ filename }</span
+      >
+    </div>
+
+    <div class="artist-container container">
+      <h2>Artist CRUD</h2>
+      <h3>Save Artist</h3>
+      <h5>Method: POST (add token in headers Authorization)</h5>
+      <span>https://music-app-node.onrender.com/api/artist/save</span>
+      <img src="img/save-artist.png" />
+      <h3>Get one Artist</h3>
+      <h5>Method: GET (add token in headers Authorization)</h5>
+      <span
+        >https://music-app-node.onrender.com/api/artist/profile/${ artist
+        id}</span
+      >
+      <h3>Get All Artists</h3>
+      <h5>Method: GET (add token in headers Authorization)</h5>
+      <span
+        >https://music-app-node.onrender.com/api/artist/profiles/${ number page
+        }</span
+      >
+      <h3>Update Artist</h3>
+      <h5>Method: PUT (add token in headers Authorization)</h5>
+      <span
+        >https://music-app-node.onrender.com/api/artist/update/${ artist id
+        }</span
+      >
+      <img src="img/save-artist.png" />
+      <h3>Delete Artist</h3>
+      <h5>Method: DELETE (add token in headers Authorization)</h5>
+      <span
+        >https://music-app-node.onrender.com/api/artist/delete/${ artist id
+        }</span
+      >
+      <img src="img/save-artist.png" />
+      <h3>Upload image Artist</h3>
+      <h5>Method: POST (add token in headers Authorization)</h5>
+      <span
+        >https://music-app-node.onrender.com/api/artist/upload/${ artist id
+        }</span
+      >
+      <img src="img/image-artist.png" />
+      <h3>Get image Artist</h3>
+      <h5>Method: GET</h5>
+      <span
+        >https://music-app-node.onrender.com/api/artist/image/${ filename
+        }</span
+      >
+    </div>
+    <div class="album-container container">
+      <h2>Album CRUD</h2>
+
+      <h3>Create Album</h3>
+      <h5>Method: POST (add token in headers Authorization)</h5>
+      <span>https://music-app-node.onrender.com/api/album/create</span>
+      <img src="img/create-album.png" />
+
+      <h3>Get One Album</h3>
+      <h5>Method: GET (add token in headers Authorization)</h5>
+      <span
+        >https://music-app-node.onrender.com/api/album/name/${ album id }</span
+      >
+
+      <h3>Get All Albums</h3>
+      <h5>Method: GET (add token in headers Authorization)</h5>
+      <span
+        >https://music-app-node.onrender.com/api/album/names/${ artist id
+        }</span
+      >
+
+      <!-- update Album -->
+    </div>
+    <div class="song-container container">
+      <h2>Song CRUD</h2>
+    </div>
+  </body>
+</html>
